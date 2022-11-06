@@ -89,6 +89,7 @@ module.exports.resolutionToHuman = resolution => {
         1920: '1080p',
         1280: '720p',
         854:  '480p',
+        858:  '480p',
         640:  '360p',
         426:  '240p'
     };

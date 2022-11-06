@@ -2,7 +2,12 @@ const {hexToUTF8, baseURL, resolutionToHuman, regexToData} = require('../core/he
 const {requestResponseRegex, requestResponseArrayRegex, request, evalReplace} = require('../core/request');
 
 module.exports.stream = {
-     atom: {
+     list:{
+          Group1:["Atom","Proton"],
+          Group2:['Fast', 'Fastly'],
+          Group3:['Turbo']
+     },
+     Group1: {
         getMovieUrl: async function(atomUrl){
             const regex = /sources = \[\{\s*"default": true,\s*"file": "([^\s]+)"/gm;
 
@@ -38,7 +43,7 @@ module.exports.stream = {
     
         }
      },
-     fast : {
+     Group2 : {
         getMovieUrl: async function(fastUrl){
             const regex = /(eval\(.+;)\s*var played = 0;/gm;
             const evalString = await requestResponseRegex(
@@ -76,5 +81,65 @@ module.exports.stream = {
     
         }
         
+     },
+     Group3: {
+        getMovieUrl: async function(turboUrl){
+            try{
+                const regex = /data-config='(.*)'/gm;
+
+                const data = await requestResponseRegex(
+                    request(turboUrl),
+                    regex
+                );
+
+                let hls = JSON.parse(data).hls;
+                if(hls.substr(0,4) != 'http' ){
+                    hls = "https:".concat(hls);
+                }
+                return hls;
+            }catch{
+                return '';
+            }
+        },
+        getResolutions: async function(url){
+            const regex = /#EXT-X-STREAM-INF:.+RESOLUTION=([\dx]+)\s(.+)/gm;
+
+            const data = await requestResponseArrayRegex(
+                request(url),
+                regex
+            );
+
+            const base = url.substr(0,url.lastIndexOf('/'));
+
+            return data.map(item => {
+                return {
+                    resolution: item[0],
+                    uri: item[1],
+                    url: [
+                        base,
+                        item[1].substr(1)
+                    ].join(''),
+                    human: resolutionToHuman(item[0])
+                };
+            });
+
+
+            
+        }
+     },
+     get: (streamName) =>{
+        const find = Object.keys(this.stream.list)
+                    .find(item => 
+                        this.stream.list[item]
+                        .map(i => 
+                            i.toLowerCase()).includes(streamName.toLowerCase()
+                        )
+                    );
+        if(find)
+            return this.stream[find];   
+        if(this.stream[streamName])
+            return this.stream[streamName];
+        return null;
      }
+
 }

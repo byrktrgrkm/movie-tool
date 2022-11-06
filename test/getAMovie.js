@@ -55,5 +55,30 @@ var beautify = require('js-beautify').js;
     }
 
    
-})();
+});
 
+
+(async function getAMovieProtonPlayer(){
+
+   
+    const regex1 = /scx = (.+);/gm;
+
+    const scx = await requestResponseRegex(
+        request("https://www.fullhdfilmizlesene.pw/film/benjamin-buttonun-tuhaf-hikayesi-izle-fhd3/"),
+        regex1
+    );
+
+    const k = convertData( JSON.parse(scx));
+    
+    
+    let urls =  k.get('Turbo');
+    let x = await stream.get('Turbo').getMovieUrl(urls[0]);
+    console.log(x);
+    console.log(urls);
+
+    let f = await stream.get('Turbo').getResolutions(x);
+
+    console.log(f);
+     
+   
+})();
