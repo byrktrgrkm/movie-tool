@@ -92,8 +92,8 @@ module.exports.resolutionToHuman = resolution => {
         640:  '360p',
         426:  '240p'
     };
-
-    if(Object.hasOwn(types, x)){
+    
+    if(types[x]){
         return types[x];
     }
     
@@ -102,4 +102,12 @@ module.exports.resolutionToHuman = resolution => {
 
 module.exports.baseURL = url => {
     return url.match(/^https?:\/\/[^#?\/]+/)[0];
+}
+
+module.exports.regexToData = (data, regex) => {
+    const execute = regex.exec(data);
+    if(execute && execute[1]){
+        return execute[1];
+    }
+    return '';
 }
