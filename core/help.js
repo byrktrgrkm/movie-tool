@@ -28,12 +28,22 @@ module.exports.convertData = (data) => {
         replace[item[0]] = d;
     });
 
-    return Object.keys(replace).map(item => {
+    
+    const list = Object.keys(replace).map(item => {
         return {
             type: replace[item].tt,
             url:  replace[item].sx.t
         }
     });
+    return { 
+        list,
+        get: function(type){
+            return list.find(i => i.type == type)?.url;
+        },
+        isset: function(type){
+            return list.find(i => i.type.toLowerCase() == type.toLowerCase()) !== undefined;
+        }
+    }
 }
 
 module.exports.btoa = (string) => {
