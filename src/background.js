@@ -135,9 +135,6 @@ ipcMain.on("downloand",async (event,field) => {
       })
    })
    
-   event.sender.send("downloand-progress",{percent:100,second:0});
-   event.sender.send("downloand-over",{filename:'....mp4'});
-
 })
 ipcMain.on("movieSource",async (event,json) => {
 
