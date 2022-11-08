@@ -6,5 +6,6 @@ module.exports.settings = {
         query: (q) => {
             return (`${this.settings.endpoints.base}/autocomplete/q.php?q=${q}`);
         }
-    }
+    },
+    resolutionOrder:["Fast","Fastly","Atom","Proton","Turbo"]
 };
