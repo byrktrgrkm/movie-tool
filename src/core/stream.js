@@ -5,9 +5,10 @@ const {requestResponseRegex, requestResponseArrayRegex, request, evalReplace} = 
 
 module.exports.stream = {
      list:{
-          Group1:["Atom","Proton"],
+          Group1:["Atom","Proton","Titan"],
           Group2:['Fast', 'Fastly'],
-          Group3:['Turbo']
+          Group3:['Turbo'],
+          Group4:['Neptune']
      },
      Group1: {
         getMovieUrl: async function(atomUrl){
@@ -127,6 +128,43 @@ module.exports.stream = {
 
 
             
+        }
+     },
+     Group4:{
+        getMovieUrl: async function(neptuneUrl){
+            const regex = /sourceData\s=.+{file:\s*"([^"]+)"/gms;
+
+            const data = await requestResponseRegex(
+                request(neptuneUrl),
+                regex
+            );
+            return data;
+        },
+        getResolutions: async function(url){
+            const base = baseURL(url);
+
+            const regex = /#EXT-X-STREAM-INF[^\s]+BANDWIDTH=([\d]+),[^\s]+RESOLUTION=([\dx]+)\s([^\s]+)/gms;
+
+            const data = await requestResponseArrayRegex(
+                request(url),
+                regex
+            );
+            
+                
+            return data.map(item => {
+                return {
+                    resolution: item[1],
+                    uri: item[2],
+                    url: [
+                        base,
+                        item[2]
+                    ].join(''),
+                    human: resolutionToHuman(item[1]),
+                    bandwidth:item[0]
+                };
+            });
+            
+    
         }
      },
      get: (streamName) =>{
