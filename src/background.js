@@ -1,5 +1,3 @@
-
-
 'use strict'
 const path = require('path');
 import { app, protocol, BrowserWindow,ipcMain } from 'electron'
@@ -19,16 +17,14 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    frame:false,
+    resizable:true,
     webPreferences: {
       webSecurity:false,
-      // Use pluginOptions.nodeIntegration, leave this alone
-      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-     // nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-     // contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
-     nodeIntegration: false, // is default value after Electron v5
-     contextIsolation: true, // protect against prototype pollution
-     enableRemoteModule: false, // turn off remote
-     preload:path.join(app.getAppPath(), 'preload2.js')
+      nodeIntegration: false, // is default value after Electron v5
+      contextIsolation: true, // protect against prototype pollution
+      enableRemoteModule: false, // turn off remote
+      preload:path.join(app.getAppPath(), 'preload2.js')
     }
   })
 
