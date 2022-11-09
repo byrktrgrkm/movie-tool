@@ -1,3 +1,4 @@
+const { settings } = require('../../setting');
 
 const secondToHumanTime = ( lang, second ) => {
     second = Math.floor(second);
@@ -22,6 +23,11 @@ const secondToHumanTime = ( lang, second ) => {
     return lang("system.time.second",second);
 }
 
+
+const languages = settings.allowedLanguages;
+
+
 export {
+    languages,
     secondToHumanTime
 }

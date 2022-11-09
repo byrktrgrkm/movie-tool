@@ -1,7 +1,13 @@
-const { settings } = require('../.././setting');
-const {language} = require(`../lang/${settings.defaultLanguage}`);
+import store from '../store';
+
+const languages = {
+    tr: require(`../lang/tr`).language,
+    en: require(`../lang/en`).language,
+}
 
 const lang = (key, ...params) => {
+    const language = languages[store.getters.language];
+
     if(key.toString().indexOf('.') > -1){
         const list = key.split('.');
         let selected = language,i;
