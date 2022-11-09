@@ -1,7 +1,10 @@
 import { createStore } from 'vuex'
+const { settings } = require('../.././setting');
+
 
 export default createStore({
   state: {
+    language: localStorage.getItem('lang') || settings.defaultLanguage,
     localStorageName:'movies',
     hls:{
       source:'',
@@ -40,6 +43,9 @@ export default createStore({
     },
     Hls(state){
       return state.hls;
+    },
+    language(state){
+      return state.language;
     }
   },
   mutations: {
@@ -75,6 +81,12 @@ export default createStore({
     Hls(state,hls){
       state.hls.poster = hls.poster;
       state.hls.source = hls.source;
+    },
+    Language(state,lang){
+      if(settings.allowedLanguages.includes(lang)){
+        state.language = lang;
+        settings.defaultLanguage = lang;
+      }
     }
   },
   actions: {
