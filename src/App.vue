@@ -1,4 +1,5 @@
 <template>
+  <Drag />
   <Header />
   <router-view/>
   <Footer />
@@ -9,13 +10,15 @@
 
 import Header from '@/components/parts/Header.vue'
 import Footer from '@/components/parts/Footer.vue'
+import Drag from '@/components/parts/Drag.vue'
 import Loading from '@/components/Loading.vue'
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
-    Loading
+    Loading,
+    Drag
   },
   beforeCreate(){
     this.$store.dispatch("LoadLastMovies")
@@ -46,6 +49,7 @@ body,html{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-top:82px;
 }
 
 #nav {
