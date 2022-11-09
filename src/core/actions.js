@@ -61,6 +61,8 @@ const getAMovie = async (url) => {
     }while(streamObject == null && order < settings.resolutionOrder.length)
 
     if(streamObject == null){
+        
+          console.log(JSON.stringify(data))
          console.error('STREAM OBJECT IS NULL');
          return null;
     }
