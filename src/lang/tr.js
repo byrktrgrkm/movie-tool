@@ -44,7 +44,12 @@ const language =  {
             minute:"Yaklaşık olarak {1} dakika {0} saniye kaldı.",
             hour:"Yaklaşık olarak {2} saat {1} dakika {0} saniye kaldı"
         },
-        movieName:'{0}-filmi-{1}'
+        movieName:'{0}-filmi-{1}',
+        language:{
+            select:"Dil Seçiniz",
+            tr:"Türkçe",
+            en:"English"
+        }
     },
     test:'mehaba'
 }
