@@ -89,6 +89,8 @@ export default {
     margin-bottom:16px;
     display:flex;
     flex-wrap: wrap;
+    height:400px;
+    overflow-y:auto;
 }
 .searching{
   display:flex;

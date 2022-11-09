@@ -64,6 +64,7 @@ export default {
     flex: 0 0 150px;
     height: 250px;
     position:relative;
+    user-select:none;
 }
 .movie-item .image .fragman{
     display:block;
@@ -89,6 +90,7 @@ export default {
 }
 .movie-item .content .movie-info{
     font-size:12px;
+    margin:10px 0;
 }
 .movie-item .content .movie-summary{
     font-size:14px;
@@ -102,7 +104,11 @@ export default {
 }
 .movie-item .actions button{
     width:100%;
-    padding:6px
+    padding:6px;
+    flex:0 0 33%;
+    font-weight:bold;
+    cursor:pointer;
+    
 
 }
 .imdb{

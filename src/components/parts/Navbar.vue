@@ -66,6 +66,7 @@ export default {
 }
 .links a {
       padding: 0 15px;
+      text-decoration: none;
 }
 
 #nav{
