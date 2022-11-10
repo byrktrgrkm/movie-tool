@@ -1,11 +1,28 @@
 import { createStore } from 'vuex'
 const { settings } = require('../.././setting');
 
+const localStorageKeys = {
+  movieList:'movies',
+  favories:'movie.favories',
+  lang:'lang'
+};
+
+
+const getLocalStorageObject = (key, deff = null) => {
+  const json = localStorage.getItem(key);
+  if(json){
+    try{
+      return JSON.parse(json);
+    }catch{
+      return deff;
+    }
+  }
+  return deff;
+}
 
 export default createStore({
   state: {
-    language: localStorage.getItem('lang') || settings.defaultLanguage,
-    localStorageName:'movies',
+    language: localStorage.getItem(localStorageKeys.lang) || settings.defaultLanguage,
     hls:{
       source:'',
       poster:''
@@ -23,7 +40,8 @@ export default createStore({
       text:'',
       searching:false
     },
-    movies:[]
+    favories:getLocalStorageObject(localStorageKeys.favories, []),
+    movies:getLocalStorageObject(localStorageKeys.movieList,[])
   },
   getters:{
     Loading(state){
@@ -46,6 +64,9 @@ export default createStore({
     },
     language(state){
       return state.language;
+    },
+    Favories(state){
+      return state.favories;
     }
   },
   mutations: {
@@ -72,9 +93,15 @@ export default createStore({
     Search(state,val){
       state.search.searching = val.length > 0;
       state.search.text = val;
-    },
+    },  
     Movies(state,movies){
-      window.localStorage.setItem(state.localStorageName,JSON.stringify(movies));
+      movies = movies.map(m => {
+        return {
+          ...m,
+          liked:state.favories.some(favori => favori.fulllink == m.fulllink)
+        }
+      });
+      localStorage.setItem(localStorageKeys.movieList,JSON.stringify(movies));
       state.movies = [...movies];
       state.search.searching = false;
     },
@@ -87,22 +114,27 @@ export default createStore({
         state.language = lang;
         settings.defaultLanguage = lang;
       }
+    },
+    Favori(state,field){
+      if(field.liked){
+          // favorilerden çıkart
+          state.favories = state.favories.filter(f => f.fulllink !== field.fulllink);
+      }else{
+        // favorilere ekle
+          state.favories.push(field);
+      }
+      // değişiklikleri localde sakla
+      field.liked = !field.liked;
+      localStorage.setItem(localStorageKeys.favories, JSON.stringify(state.favories));
     }
   },
   actions: {
     GetAMoive({state},uri){
       return state.movies.find(i => i.dizilink == uri);
-    },
-    LoadLastMovies({state}){
-      let data = window.localStorage.getItem(state.localStorageName);
-      try{
-
-        state.movies = JSON.parse(data);
-      }catch{
-        console.error("json parse error");
-      }
     }
   },
   modules: {
   }
 })
+
+
