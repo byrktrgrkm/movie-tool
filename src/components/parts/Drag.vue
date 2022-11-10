@@ -13,9 +13,18 @@ export default {
   name:'drag-menu',
   methods:{
     close(){
-        if(confirm('Tarayıcıyı kapatmak istiyor musunuz?')){
-            window.close();
+      this.$swal({
+        title: 'Tarayıcıyı kapatmak istiyor musunuz?',
+        showDenyButton: true,
+        showCancelButton: true,
+        showConfirmButton:false,
+        denyButtonText: `Kapat`,
+        cancelButtonText:'Vazgeç'
+      }).then((result) => {
+        if (result.isDenied) {
+          window.close();
         }
+      });
     }
   }
 }

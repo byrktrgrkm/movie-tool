@@ -2,7 +2,8 @@
   
     <div id="nav">
         <div class="links">
-          <router-link to="/">{{lang('navigation.movie_downloand')}}</router-link> |
+          <router-link to="/">{{lang('navigation.movie_downloand')}}</router-link>
+          <router-link to="/favories">{{lang('navigation.favories')}}</router-link>
           <router-link to="/about">{{lang('navigation.my_movies')}}</router-link>
         </div>
 

@@ -1,9 +1,7 @@
 <template>
   <div id="footer">
     <nav>
-        <li>{{ lang('footer.node_version', node_version) }}</li>
-        <li>{{ lang('footer.electron_version', electron_version) }}</li>
-        <li>{{ lang('footer.tool_version', move_tool_version) }}</li>
+        <li> <span style="color:darkred;">❤❤❤</span> </li>
     </nav>
   </div>
 </template>
