@@ -1,5 +1,6 @@
 
 <template>
+  <div class="container-player">
   <video-player
     :src="src"
     class="player"
@@ -18,6 +19,7 @@
           </div>
         </template>
   </video-player>
+  </div>
 </template>
 
 
@@ -52,6 +54,19 @@ export default {
 
 
 <style scoped>
+
+.container-player{
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+}
+
 .player{
   width:100%;
 }
