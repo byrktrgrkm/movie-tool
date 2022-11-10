@@ -64,7 +64,7 @@ export default {
         'Movies'
       ]),
       movieNotFound(){
-        return !this.Search.searching && this.Movies.length == 0 && this.Search.text.length > 0;
+        return !this.Search.searching && this.Movies instanceof Array && this.Movies.length == 0 && this.Search.text.length > 0;
       }
   }, 
   data(){
