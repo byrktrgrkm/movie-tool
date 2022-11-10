@@ -23,8 +23,9 @@ async function createWindow() {
       webSecurity:false,
       nodeIntegration: false, // is default value after Electron v5
       contextIsolation: true, // protect against prototype pollution
-      enableRemoteModule: false, // turn off remote
-      preload:path.join(app.getAppPath(), 'preload2.js')
+      enableRemoteModule: true, // turn off remote
+      //preload:path.join(app.getAppPath(), 'preload2.js'),
+      preload:path.join(__static, 'preload2.js'),
     }
   })
 
