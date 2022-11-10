@@ -1,7 +1,8 @@
 const language =  {
     navigation:{
-        movie_downloand:'Movie Downloand',
-        my_movies:'My Movies'
+        movie_downloand:'Movies',
+        my_movies:'Downloanded',
+        favories:'Favories',
     },
     movie:{
         resolution_type_not_found: 'Resolution is not found!',

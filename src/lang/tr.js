@@ -1,7 +1,8 @@
 const language =  {
     navigation:{
-        movie_downloand:'Film indir',
-        my_movies:'Filmlerim'
+        movie_downloand:'Filmler',
+        my_movies:'İndirdiklerim',
+        favories:'Favorilerim',
     },
     movie:{
         resolution_type_not_found: 'Çözünürlük bulunamadı',
