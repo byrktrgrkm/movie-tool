@@ -1,8 +1,7 @@
 # film-indir
 
 ## Projeden Görüntüler
-![1](/docs/1-2.png)
-![1](/docs/1.png)
+![1](/docs/1-3.png)
 ![1](/docs/2.png)
 ![1](/docs/3.png)
 ![1](/docs/4.png)

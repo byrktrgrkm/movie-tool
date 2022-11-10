@@ -23,5 +23,5 @@ pnpm-debug.log*
 *.sw?
 
 #Electron-builder output
-#/dist_electron
+/dist_electron
 src/assets/Thumbs.db

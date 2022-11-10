@@ -21,7 +21,7 @@ export default {
     Drag
   },
   beforeCreate(){
-    this.$store.dispatch("LoadLastMovies")
+    //this.$store.dispatch("LoadLastMovies")
 
     const store = this.$store;
     window.api.receive("movies",(data) => {
